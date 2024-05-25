@@ -1,5 +1,46 @@
 # Algebra 1
 
+## Evaluating an expression with one variable
+
+Given the following expression `5t + 1`, evaluate the expression when `t=1`, `t=8`, and `t=10`.
+```haskell
+expression = \t -> 5*t + 1
+map expression [1,8,10]
+[8,43,53]
+```
+## Introduction to variables
+
+Evaluate the expression `9 - z` when `z = 4`
+```haskell
+(\z -> 9 - z) 4
+5
+```
+Evaluate `2y` when `y = 6`
+```haskell
+(\y -> 2*y) 6
+12
+```
+Evaluate the expression `7 + 4b` when `b = 3`
+```haskell
+(\b -> 7 + 4*b) 3
+19
+```
+Evaluate the expression `8/d + 3` when `d = 4`
+```haskell
+(\d -> 8/d + 3) 4
+5
+```
+Challenge problem: Evaluate `e*e - 5*e` when `e = 5`
+```haskell
+(\e -> e*e - 5*e) 5
+0
+```
+Complete the table to evaluate `2x` at different values of `x`
+```haskell
+map (\x -> 2*x) [1,2,3,4,5,6]
+[2,4,6,8,10,12]
+```
+
 ## Linear equations with variables on both sides
 
 **Why we do the same thing to both sides: Variable on both sides**
