@@ -41,6 +41,49 @@ map (\x -> 2*x) [1,2,3,4,5,6]
 [2,4,6,8,10,12]
 ```
 
+## Evaluating expression with two variables
+
+Evaluating expressions with multiple variables involves substituting given values for each variable and simplifying the expression. By replacing variables with their corresponding values, we can easily compute the result of expressions, even for more complex examples with multiple terms and operations. Created by Sal Khan.
+
+Let's break down the evaluation of the expression `(\a -> \b -> a + b) 7 2`
+
+```haskell
+(\a -> a + 2) 7
+9
+(\b -> b + 7) 2
+9
+(\a -> \b -> a + b) 7 2
+9
+```
+
+`xy - y + 3x`:
+```haskell
+(\x -> \y -> x * y - y + 3 * x) 3 2
+13
+(\x -> x * 2 - 2 + 3 * x) 3
+13
+(\y -> 3 * y - 2 + 3 * 3) 2
+13
+```
+
+Evaluate ‍`3 + j*k + k*k*k` when `j=2` and `k=6`
+```haskell
+(\j -> \k -> 3 + j * k + k*k*k) 2 6
+231
+
+(\r -> \s -> 8 * r - r * s) 6 5
+18
+
+(\f-> \g-> \h-> f*f*f + 11*g - 4*h) 3 2 7
+21
+```
+
+
+
+The expression `(\a -> \b -> a + b)` is a lambda function (also known as an anonymous function) that takes two arguments, `a` and `b`.
+This lambda function can be read as: "a function that takes an argument a and returns another function that takes an argument b and returns the result of a + b."
+
+
 ## Linear equations with variables on both sides
 
 **Why we do the same thing to both sides: Variable on both sides**
