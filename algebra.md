@@ -77,11 +77,76 @@ Evaluate ‍`3 + j*k + k*k*k` when `j=2` and `k=6`
 (\f-> \g-> \h-> f*f*f + 11*g - 4*h) 3 2 7
 21
 ```
-
-
-
 The expression `(\a -> \b -> a + b)` is a lambda function (also known as an anonymous function) that takes two arguments, `a` and `b`.
 This lambda function can be read as: "a function that takes an argument a and returns another function that takes an argument b and returns the result of a + b."
+
+## Least common multiple
+
+```haskell
+multiples n = [n * x | x <- [1..]]
+take 20 (multiples 8)
+[8,16,24,32,40,48,56,64,72,80,88,96,104,112,120,128,136,144,152,160]
+```
+So this generates a list of multiples. Here is a more general example:
+
+```haskell
+-- Function to generate multiples of a number
+multiples :: Integer -> [Integer]
+multiples n = [n * x | x <- [1..]]
+
+-- Function to find the first common element in two sorted lists
+commonMultiple :: [Integer] -> [Integer] -> Integer
+commonMultiple (x:xs) (y:ys)
+  | x == y    = x
+  | x < y     = commonMultiple xs (y:ys)
+  | otherwise = commonMultiple (x:xs) ys
+
+-- Function to find the LCM of two numbers using the multiples and commonMultiple functions
+lcmUsingMultiples :: Integer -> Integer -> Integer
+lcmUsingMultiples a b = commonMultiple (multiples a) (multiples b)
+```
+
+Example Walkthrough
+
+Let's walk through an example to see how it works in practice.
+Finding the LCM of 4 and 6
+
+    Multiples of 4: [4, 8, 12, 16, 20, 24, 28, 32, ...]
+    Multiples of 6: [6, 12, 18, 24, 30, 36, 42, ...]
+
+    Compare 4 (from the first list) with 6 (from the second list):
+        4 < 6, so discard 4 and move to the next element in the first list.
+    Compare 8 (from the first list) with 6 (from the second list):
+        8 > 6, so discard 6 and move to the next element in the second list.
+    Compare 8 (from the first list) with 12 (from the second list):
+        8 < 12, so discard 8 and move to the next element in the first list.
+    Compare 12 (from the first list) with 12 (from the second list):
+        12 == 12, so return 12.
+
+Thus, the first common multiple of 4 and 6 is 12, which is also their LCM.
+
+This method effectively finds the least common multiple by finding the first common element in the infinite lists of multiples, leveraging the sorted nature of these lists.
+
+Let's see a more simple or smaller example of comparing common numbers from two lists.
+
+```haskell
+firstCommon :: [Integer] -> [Integer] -> Maybe Integer
+firstCommon (x:xs) (y:ys)
+  | x == y    = Just x
+  | x < y     = firstCommon xs (y:ys)
+  | otherwise = firstCommon (x:xs) ys
+firstCommon _ _ = Nothing  -- In case one of the lists is empty
+```
+And without the maybe:
+```haskell
+firstCommon :: [Integer] -> [Integer] -> Integer
+firstCommon (x:xs) (y:ys)
+  | x == y    = x
+  | x < y     = firstCommon xs (y:ys)
+  | otherwise = firstCommon (x:xs) ys
+```
+
+
 
 
 ## Linear equations with variables on both sides
